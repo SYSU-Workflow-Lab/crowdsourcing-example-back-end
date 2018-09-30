@@ -15,6 +15,8 @@ public class SubTask {
     @Column(nullable = false)
     private String userId;
 
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     @Column(nullable = false)
     private String subtask;
 

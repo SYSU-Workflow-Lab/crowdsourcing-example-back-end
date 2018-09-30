@@ -18,4 +18,8 @@ public class SubTaskDAO {
         subTaskRepository.save(subTask);
     }
 
+    public void deleteIfExist(String userId) {
+        subTaskRepository.deleteSubTasksByUserId(userId);
+    }
+
 }

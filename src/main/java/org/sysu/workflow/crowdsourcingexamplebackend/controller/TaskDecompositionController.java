@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.sysu.workflow.crowdsourcingexamplebackend.dao.SubTaskDAO;
+import org.sysu.workflow.crowdsourcingexamplebackend.dao.TipsAndTasksDAO;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.FormData;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.SubTask;
 
@@ -24,23 +25,26 @@ public class TaskDecompositionController {
     @Autowired
     private SubTaskDAO subTaskDAO;
 
+    @Autowired
+    private TipsAndTasksDAO tipsAndTasksDAO;
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping(value = "/tips-and-task")
     public ResponseEntity<?> getHotCinemas() {
-        List<String> result = new ArrayList<>();
-        result.add(" tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips tips ");
-        result.add(" tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks tasks ");
+        List<String> result = tipsAndTasksDAO.getTipsAndTaskByStage("td");
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping(value = "/submit")
     public ResponseEntity<?> submit(@RequestBody FormData tasks) {
-        logger.info(tasks.getUserId());
+//        logger.info(tasks.getUserId());
+        String userId = tasks.getUserId();
+        subTaskDAO.deleteIfExist(userId);
         List<LinkedHashMap<String, String>> data = (ArrayList<LinkedHashMap<String, String>>) tasks.getData();
         for (LinkedHashMap<String, String> i : data) {
             for (String k : i.keySet()) {
-                subTaskDAO.save(new SubTask(tasks.getUserId(), i.get(k)));
+                subTaskDAO.save(new SubTask(userId, i.get(k)));
             }
         }
         return new ResponseEntity<>(HttpStatus.OK);
