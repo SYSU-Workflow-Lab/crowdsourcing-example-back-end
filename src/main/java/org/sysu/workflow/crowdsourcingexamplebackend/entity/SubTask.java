@@ -18,14 +18,14 @@ public class SubTask {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(nullable = false)
-    private String subtask;
+    private String content;
 
     public SubTask() {
     }
 
-    public SubTask(String userId, String subtask) {
+    public SubTask(String userId, String content) {
         this.userId = userId;
-        this.subtask = subtask;
+        this.content = content;
     }
 
     public Long getId() {
@@ -44,11 +44,11 @@ public class SubTask {
         this.userId = userId;
     }
 
-    public String getSubtask() {
-        return subtask;
+    public String getContent() {
+        return content;
     }
 
-    public void setSubtask(String subtask) {
-        this.subtask = subtask;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

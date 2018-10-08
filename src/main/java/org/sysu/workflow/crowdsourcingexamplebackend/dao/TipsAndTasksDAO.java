@@ -2,7 +2,6 @@ package org.sysu.workflow.crowdsourcingexamplebackend.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.sysu.workflow.crowdsourcingexamplebackend.entity.TipsAndTasks;
 import org.sysu.workflow.crowdsourcingexamplebackend.repository.TipsAndTasksRepository;
 
 import java.util.ArrayList;
@@ -23,5 +22,7 @@ public class TipsAndTasksDAO {
         result.add(tipsAndTasksRepository.findByStageAndType(stage, 1).getContent());
         return result;
     }
+
+
 
 }

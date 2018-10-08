@@ -31,7 +31,7 @@ public class TaskDecompositionController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping(value = "/tips-and-task")
-    public ResponseEntity<?> getHotCinemas() {
+    public ResponseEntity<?> getTipsAndTask() {
         List<String> result = tipsAndTasksDAO.getTipsAndTaskByStage("td");
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
