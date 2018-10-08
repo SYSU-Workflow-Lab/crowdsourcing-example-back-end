@@ -19,14 +19,14 @@ import java.util.List;
  * Created by Skye on 2018/9/28.
  */
 @RestController
-@RequestMapping("/task-decomposition")
+@RequestMapping("/api/task-decomposition")
 public class TaskDecompositionController {
 
     @Autowired
-    private SubTaskDAO subTaskDAO;
+    private TipsAndTasksDAO tipsAndTasksDAO;
 
     @Autowired
-    private TipsAndTasksDAO tipsAndTasksDAO;
+    private SubTaskDAO subTaskDAO;
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 

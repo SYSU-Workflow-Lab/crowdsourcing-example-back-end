@@ -19,7 +19,7 @@ import java.util.List;
  * Created by Skye on 2018/9/30.
  */
 @RestController
-@RequestMapping("/vote")
+@RequestMapping("/api/vote")
 public class VoteController {
 
     @Autowired
@@ -40,8 +40,8 @@ public class VoteController {
     }
 
     @GetMapping(value = "/vtd/data")
-    public ResponseEntity<?> getVoteData() {
-        List<VotePageData> result = subTaskDAO.getVoteData();
+    public ResponseEntity<?> getVotePageData() {
+        List<VotePageData> result = subTaskDAO.getVotePageData();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

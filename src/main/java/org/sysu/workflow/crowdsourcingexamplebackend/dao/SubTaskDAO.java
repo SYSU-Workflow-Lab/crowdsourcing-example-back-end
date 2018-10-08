@@ -26,7 +26,7 @@ public class SubTaskDAO {
         subTaskRepository.deleteSubTasksByUserId(userId);
     }
 
-    public List<VotePageData> getVoteData() {
+    public List<VotePageData> getVotePageData() {
         List<VotePageData> result = new ArrayList<>();
         List<String> userIds = subTaskRepository.findAllUserId();
         for (int i = 0; i < userIds.size(); i++) {
@@ -34,6 +34,11 @@ public class SubTaskDAO {
             result.add(new VotePageData(userIds.get(i), contents));
         }
         return result;
+    }
+
+    public String getSubTaskByUserIdAndIndex(String userId, int index) {
+        List<String> contents = subTaskRepository.findContentsByUserId(userId);
+        return contents.get(index);
     }
 
 }

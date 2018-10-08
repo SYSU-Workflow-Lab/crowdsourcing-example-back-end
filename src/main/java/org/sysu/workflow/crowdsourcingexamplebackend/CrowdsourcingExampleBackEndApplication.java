@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.sysu.workflow.crowdsourcingexamplebackend.entity.Election;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.SubTask;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.TipsAndTasks;
+import org.sysu.workflow.crowdsourcingexamplebackend.repository.ElectionRepository;
 import org.sysu.workflow.crowdsourcingexamplebackend.repository.SubTaskRepository;
 import org.sysu.workflow.crowdsourcingexamplebackend.repository.TipsAndTasksRepository;
 
@@ -35,10 +37,16 @@ public class CrowdsourcingExampleBackEndApplication {
     }
 
     @Bean
-    public CommandLineRunner init(TipsAndTasksRepository tipsAndTasksRepository, SubTaskRepository subTaskRepository) {
+    public CommandLineRunner init(TipsAndTasksRepository tipsAndTasksRepository,
+                                  SubTaskRepository subTaskRepository,
+                                  ElectionRepository electionRepository) {
         return args -> {
             tipsAndTasksRepository.save(new TipsAndTasks("td", 0, "0 td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td 0"));
             tipsAndTasksRepository.save(new TipsAndTasks("td", 1, "1 td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td 1"));
+
+            tipsAndTasksRepository.save(new TipsAndTasks("tc", 0, "0 tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc 0"));
+            tipsAndTasksRepository.save(new TipsAndTasks("tc", 1, "1 tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc tc 1"));
+
 
             tipsAndTasksRepository.save(new TipsAndTasks("vtd", 0, "0 vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd 0"));
             tipsAndTasksRepository.save(new TipsAndTasks("vtd", 1, "1 vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd 1"));
@@ -53,6 +61,10 @@ public class CrowdsourcingExampleBackEndApplication {
             subTaskRepository.save(new SubTask("user_3", "user 3 : first step"));
             subTaskRepository.save(new SubTask("user_3", "user 3 : second step"));
             subTaskRepository.save(new SubTask("user_3", "user 3 : third step"));
+
+            electionRepository.save(new Election("qwe", "user_2"));
+            electionRepository.save(new Election("asd", "user_2"));
+            electionRepository.save(new Election("zxc", "user_1"));
 
         };
     }

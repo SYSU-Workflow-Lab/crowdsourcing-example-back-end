@@ -23,4 +23,15 @@ public class ElectionDAO {
         electionRepository.deleteElectionByFromId(userId);
     }
 
+    public String getTheBestAndClean() {
+        String targetId = "";
+        try {
+            targetId = (String) electionRepository.findTheBestUserId().get(0)[0];
+            electionRepository.deleteAll();
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+        return targetId;
+    }
+
 }
