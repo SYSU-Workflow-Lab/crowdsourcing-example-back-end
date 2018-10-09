@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.sysu.workflow.crowdsourcingexamplebackend.dao.CompletedTaskDAO;
 import org.sysu.workflow.crowdsourcingexamplebackend.dao.ElectionDAO;
 import org.sysu.workflow.crowdsourcingexamplebackend.dao.SubTaskDAO;
 import org.sysu.workflow.crowdsourcingexamplebackend.dao.TipsAndTasksDAO;
@@ -27,6 +28,9 @@ public class VoteController {
     private SubTaskDAO subTaskDAO;
 
     @Autowired
+    private CompletedTaskDAO completedTaskDAO;
+
+    @Autowired
     private TipsAndTasksDAO tipsAndTasksDAO;
 
     @Autowired
@@ -40,9 +44,15 @@ public class VoteController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @GetMapping(value = "/vtd/data")
-    public ResponseEntity<?> getVotePageData() {
+    @GetMapping(value = "/vtd/data/*")
+    public ResponseEntity<?> getVTDData() {
         List<VotePageData> result = subTaskDAO.getVotePageData();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/vtc/data/{index}")
+    public ResponseEntity<?> getVTCData(@PathVariable String index) {
+        List<VotePageData> result = completedTaskDAO.getVotePageData(index);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

@@ -18,8 +18,12 @@ public class TipsAndTasksDAO {
 
     public List<String> getTipsAndTaskByStage(String stage) {
         List<String> result = new ArrayList<>();
-        result.add(tipsAndTasksRepository.findByStageAndType(stage, 0).getContent());
-        result.add(tipsAndTasksRepository.findByStageAndType(stage, 1).getContent());
+        try {
+            result.add(tipsAndTasksRepository.findByStageAndType(stage, 0).getContent());
+            result.add(tipsAndTasksRepository.findByStageAndType(stage, 1).getContent());
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
         return result;
     }
 
