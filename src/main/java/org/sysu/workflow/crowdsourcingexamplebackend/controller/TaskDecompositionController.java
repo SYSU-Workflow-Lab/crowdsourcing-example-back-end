@@ -11,6 +11,7 @@ import org.sysu.workflow.crowdsourcingexamplebackend.dao.TipsAndTasksDAO;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.FormData;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.SubTask;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -37,6 +38,7 @@ public class TaskDecompositionController {
     }
 
     @PostMapping(value = "/submit")
+    @Transactional
     public ResponseEntity<?> submit(@RequestBody FormData tasks) {
 //        logger.info(tasks.getUserId());
         String userId = tasks.getUserId();

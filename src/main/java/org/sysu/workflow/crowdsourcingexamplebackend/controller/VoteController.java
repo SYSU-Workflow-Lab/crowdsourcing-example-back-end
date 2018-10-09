@@ -13,6 +13,7 @@ import org.sysu.workflow.crowdsourcingexamplebackend.entity.Election;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.FormData;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.VotePageData;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -46,6 +47,7 @@ public class VoteController {
     }
 
     @PostMapping(value = "/submit")
+    @Transactional
     public ResponseEntity<?> submit(@RequestBody FormData vote) {
         String fromId = vote.getUserId();
         electionDAO.deleteIfExist(fromId);
