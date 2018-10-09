@@ -18,6 +18,8 @@ public class SubTaskDAO {
     @Autowired
     private SubTaskRepository subTaskRepository;
 
+    private int count = 3;
+
     public void save(SubTask subTask) {
         subTaskRepository.save(subTask);
     }
@@ -41,4 +43,11 @@ public class SubTaskDAO {
         return contents.get(index);
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(String targetId) {
+        count = subTaskRepository.getCountByUserId(targetId);
+    }
 }

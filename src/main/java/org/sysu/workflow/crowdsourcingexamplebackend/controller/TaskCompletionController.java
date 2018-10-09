@@ -43,14 +43,15 @@ public class TaskCompletionController {
     @GetMapping(value = "/tips-and-task/{index}")
     public ResponseEntity<?> getTipsAndTask(@PathVariable int index) {
         List<String> result = tipsAndTasksDAO.getTipsAndTaskByStage("tc");
-        if (targetId == null || targetId == "") {
+        if (targetId == null || "".equals(targetId)) {
             targetId = electionDAO.getTheBestAndClean();
         }
         result.add(subTaskDAO.getSubTaskByUserIdAndIndex(targetId, index));
+        subTaskDAO.setCount(targetId);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PostMapping(value = "submit")
+    @PostMapping(value = "/submit")
     @Transactional
     public ResponseEntity<?> submit(@RequestBody FormData solution) {
         String fromId = solution.getUserId();

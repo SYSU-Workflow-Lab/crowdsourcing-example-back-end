@@ -38,4 +38,8 @@ public class CompletedTaskDAO {
         return result;
     }
 
+    public String findContentByUserIdAndSubTaskIndex(String userId, String subTaskId) {
+        return completedTaskRepository.findCompletedTaskByUserIdAndSubTaskIndex(userId, subTaskId).getContent();
+    }
+
 }

@@ -16,4 +16,6 @@ public interface CompletedTaskRepository extends JpaRepository<CompletedTask, Lo
 
     List<CompletedTask> findCompletedTasksBySubTaskIndex(String subtaskIndex);
 
+    CompletedTask findCompletedTaskByUserIdAndSubTaskIndex(String userId, String subTaskIndex);
+
 }

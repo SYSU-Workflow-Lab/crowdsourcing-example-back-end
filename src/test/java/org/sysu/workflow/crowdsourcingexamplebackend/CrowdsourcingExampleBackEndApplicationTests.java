@@ -18,7 +18,7 @@ public class CrowdsourcingExampleBackEndApplicationTests {
 
     @Test
     public void test1() {
-        assertThat((String) electionRepository.findTheBestUserId().get(0)[0]).isEqualTo("user_2");
+        assertThat((String) electionRepository.findTheBestUserIdBySubTaskIndex("2").get(0)[0]).isEqualTo("user_2");
     }
 
 }

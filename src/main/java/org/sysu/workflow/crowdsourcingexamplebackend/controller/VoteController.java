@@ -56,13 +56,13 @@ public class VoteController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/submit")
+    @PostMapping(value = "/submit/{index}")
     @Transactional
-    public ResponseEntity<?> submit(@RequestBody FormData vote) {
+    public ResponseEntity<?> submit(@PathVariable String index, @RequestBody FormData vote) {
         String fromId = vote.getUserId();
         electionDAO.deleteIfExist(fromId);
         String targetId = (String) vote.getData();
-        electionDAO.save(new Election(fromId, targetId));
+        electionDAO.save(new Election(fromId, targetId, index));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -21,4 +21,7 @@ public interface SubTaskRepository extends JpaRepository<SubTask, Long> {
     @Query(value = "select content from sub_task where user_id = ?1", nativeQuery = true)
     List<String> findContentsByUserId(String userId);
 
+    @Query(value = "select count(*) from sub_task where user_id = ?1", nativeQuery = true)
+    int getCountByUserId(String userId);
+
 }
