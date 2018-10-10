@@ -14,7 +14,7 @@ import java.util.List;
 public interface ElectionRepository extends JpaRepository<Election, Long> {
 
     @Transactional
-    void deleteElectionByFromId(String fromId);
+    void deleteElectionByFromIdAndSubTaskIndex(String fromId, String subTaskIndex);
 
     @Transactional
     @Modifying

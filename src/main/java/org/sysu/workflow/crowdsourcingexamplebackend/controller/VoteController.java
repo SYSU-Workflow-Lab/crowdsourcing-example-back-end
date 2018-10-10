@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.CompletedTaskDAO;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.ElectionDAO;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.SubTaskDAO;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.TipsAndTasksDAO;
+import org.sysu.workflow.crowdsourcingexamplebackend.dao.*;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.Election;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.FormData;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.VotePageData;
@@ -29,6 +26,9 @@ public class VoteController {
 
     @Autowired
     private CompletedTaskDAO completedTaskDAO;
+
+    @Autowired
+    private MergedTaskDAO mergedTaskDAO;
 
     @Autowired
     private TipsAndTasksDAO tipsAndTasksDAO;
@@ -56,11 +56,17 @@ public class VoteController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/vtm/data/*")
+    public ResponseEntity<?> getVTMData() {
+        List<VotePageData> result = mergedTaskDAO.getVotePageData();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
     @PostMapping(value = "/submit/{index}")
     @Transactional
     public ResponseEntity<?> submit(@PathVariable String index, @RequestBody FormData vote) {
         String fromId = vote.getUserId();
-        electionDAO.deleteIfExist(fromId);
+        electionDAO.deleteIfExist(fromId, index);
         String targetId = (String) vote.getData();
         electionDAO.save(new Election(fromId, targetId, index));
         return new ResponseEntity<>(HttpStatus.OK);

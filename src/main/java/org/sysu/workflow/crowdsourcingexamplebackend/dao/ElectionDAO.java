@@ -25,8 +25,8 @@ public class ElectionDAO {
         electionRepository.save(election);
     }
 
-    public void deleteIfExist(String userId) {
-        electionRepository.deleteElectionByFromId(userId);
+    public void deleteIfExist(String userId, String index) {
+        electionRepository.deleteElectionByFromIdAndSubTaskIndex(userId, index);
     }
 
     public String getTheBestAndClean() {

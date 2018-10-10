@@ -9,14 +9,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.sysu.workflow.crowdsourcingexamplebackend.entity.CompletedTask;
-import org.sysu.workflow.crowdsourcingexamplebackend.entity.Election;
-import org.sysu.workflow.crowdsourcingexamplebackend.entity.SubTask;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.TipsAndTasks;
-import org.sysu.workflow.crowdsourcingexamplebackend.repository.CompletedTaskRepository;
-import org.sysu.workflow.crowdsourcingexamplebackend.repository.ElectionRepository;
-import org.sysu.workflow.crowdsourcingexamplebackend.repository.SubTaskRepository;
-import org.sysu.workflow.crowdsourcingexamplebackend.repository.TipsAndTasksRepository;
+import org.sysu.workflow.crowdsourcingexamplebackend.repository.*;
 
 @SpringBootApplication
 @Configuration
@@ -42,7 +36,8 @@ public class CrowdsourcingExampleBackEndApplication {
     public CommandLineRunner init(TipsAndTasksRepository tipsAndTasksRepository,
                                   SubTaskRepository subTaskRepository,
                                   ElectionRepository electionRepository,
-                                  CompletedTaskRepository completedTaskRepository) {
+                                  CompletedTaskRepository completedTaskRepository,
+                                  MergedTaskRepository mergedTaskRepository) {
         return args -> {
             tipsAndTasksRepository.save(new TipsAndTasks("td", 0, "0 td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td 0"));
             tipsAndTasksRepository.save(new TipsAndTasks("td", 1, "1 td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td 1"));
@@ -59,42 +54,49 @@ public class CrowdsourcingExampleBackEndApplication {
             tipsAndTasksRepository.save(new TipsAndTasks("vtc", 0, "0 vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc 0"));
             tipsAndTasksRepository.save(new TipsAndTasks("vtc", 1, "1 vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc vtc 1"));
 
-            subTaskRepository.save(new SubTask("user_1", "user 1 : first step"));
-            subTaskRepository.save(new SubTask("user_1", "user 1 : second step"));
-
-            subTaskRepository.save(new SubTask("user_2", "user 2 : first step"));
-            subTaskRepository.save(new SubTask("user_2", "user 2 : second step"));
-            subTaskRepository.save(new SubTask("user_2", "user 2 : third step"));
-
-            subTaskRepository.save(new SubTask("user_3", "user 3 : first step"));
-            subTaskRepository.save(new SubTask("user_3", "user 3 : second step"));
-            subTaskRepository.save(new SubTask("user_3", "user 3 : third step"));
-
-//            electionRepository.save(new Election("qwe", "user_2", 0));
-//            electionRepository.save(new Election("asd", "user_2", 0));
-//            electionRepository.save(new Election("zxc", "user_1", 0));
-
-            completedTaskRepository.save(new CompletedTask("user_1", "user 1 : first solution", "0"));
-            completedTaskRepository.save(new CompletedTask("user_1", "user 1 : second solution", "1"));
-
-            completedTaskRepository.save(new CompletedTask("user_2", "user 2 : first solution", "0"));
-            completedTaskRepository.save(new CompletedTask("user_2", "user 2 : second solution", "1"));
-            completedTaskRepository.save(new CompletedTask("user_2", "user 2 : third solution", "2"));
-
-            completedTaskRepository.save(new CompletedTask("user_3", "user 3 : first solution", "0"));
-            completedTaskRepository.save(new CompletedTask("user_3", "user 3 : second solution", "1"));
-            completedTaskRepository.save(new CompletedTask("user_3", "user 3 : third solution", "2"));
-
-            electionRepository.save(new Election("qwe", "user_1", "0"));
-            electionRepository.save(new Election("asd", "user_2", "0"));
-            electionRepository.save(new Election("zxc", "user_1", "0"));
-
-            electionRepository.save(new Election("qwe", "user_1", "1"));
-            electionRepository.save(new Election("asd", "user_3", "1"));
-            electionRepository.save(new Election("zxc", "user_3", "1"));
-
-            electionRepository.save(new Election("qwe", "user_2", "2"));
-            electionRepository.save(new Election("asd", "user_3", "2"));
+            tipsAndTasksRepository.save(new TipsAndTasks("vtm", 0, "0 vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm 0"));
+            tipsAndTasksRepository.save(new TipsAndTasks("vtm", 1, "1 vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm 1"));
+//
+//            subTaskRepository.save(new SubTask("user_1", "user 1 : first step"));
+//            subTaskRepository.save(new SubTask("user_1", "user 1 : second step"));
+//
+//            subTaskRepository.save(new SubTask("user_2", "user 2 : first step"));
+//            subTaskRepository.save(new SubTask("user_2", "user 2 : second step"));
+//            subTaskRepository.save(new SubTask("user_2", "user 2 : third step"));
+//
+//            subTaskRepository.save(new SubTask("user_3", "user 3 : first step"));
+//            subTaskRepository.save(new SubTask("user_3", "user 3 : second step"));
+//            subTaskRepository.save(new SubTask("user_3", "user 3 : third step"));
+//
+////            electionRepository.save(new Election("qwe", "user_2", 0));
+////            electionRepository.save(new Election("asd", "user_2", 0));
+////            electionRepository.save(new Election("zxc", "user_1", 0));
+//
+//            completedTaskRepository.save(new CompletedTask("user_1", "user 1 : first solution", "0"));
+//            completedTaskRepository.save(new CompletedTask("user_1", "user 1 : second solution", "1"));
+//
+//            completedTaskRepository.save(new CompletedTask("user_2", "user 2 : first solution", "0"));
+//            completedTaskRepository.save(new CompletedTask("user_2", "user 2 : second solution", "1"));
+//            completedTaskRepository.save(new CompletedTask("user_2", "user 2 : third solution", "2"));
+//
+//            completedTaskRepository.save(new CompletedTask("user_3", "user 3 : first solution", "0"));
+//            completedTaskRepository.save(new CompletedTask("user_3", "user 3 : second solution", "1"));
+//            completedTaskRepository.save(new CompletedTask("user_3", "user 3 : third solution", "2"));
+//
+////            electionRepository.save(new Election("qwe", "user_1", "0"));
+////            electionRepository.save(new Election("asd", "user_2", "0"));
+////            electionRepository.save(new Election("zxc", "user_1", "0"));
+////
+////            electionRepository.save(new Election("qwe", "user_1", "1"));
+////            electionRepository.save(new Election("asd", "user_3", "1"));
+////            electionRepository.save(new Election("zxc", "user_3", "1"));
+////
+////            electionRepository.save(new Election("qwe", "user_2", "2"));
+////            electionRepository.save(new Election("asd", "user_3", "2"));
+//
+//            mergedTaskRepository.save(new MergedTask("user_1", "user 1 : first solution\nuser 3 : second solution\nuser 2 : third solution"));
+//            mergedTaskRepository.save(new MergedTask("user_2", "user 1 : first solution\tuser 3 : second solution\tuser 2 : third solution"));
+//            mergedTaskRepository.save(new MergedTask("user_3", "user 1 : first solution.user 3 : second solution.user 2 : third solution"));
 
         };
     }
