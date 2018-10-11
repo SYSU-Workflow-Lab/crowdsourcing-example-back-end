@@ -27,4 +27,7 @@ public interface ElectionRepository extends JpaRepository<Election, Long> {
     @Query(value = "select target_id, count(*) as count from election where sub_task_index = ?1 and stage = ?2 group by target_id order by count desc", nativeQuery = true)
     List<Object[]> findTheBestUserIdBySubTaskIndexAndStage(String subTaskIndex, String stage);
 
+    @Query(value = "select target_id, count(*) as count from election where stage = 'vt' group by target_id order by count desc", nativeQuery = true)
+    List<Object[]> getIsComplicated();
+
 }

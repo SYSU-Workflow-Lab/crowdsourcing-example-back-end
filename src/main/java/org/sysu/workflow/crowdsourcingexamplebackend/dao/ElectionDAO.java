@@ -63,4 +63,8 @@ public class ElectionDAO {
         return bests;
     }
 
+    public String getIsComplicated() {
+        return (String) electionRepository.getIsComplicated().get(0)[0];
+    }
+
 }

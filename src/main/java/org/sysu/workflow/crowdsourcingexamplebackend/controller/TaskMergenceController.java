@@ -50,6 +50,7 @@ public class TaskMergenceController {
         if (targetIds == null || targetIds.isEmpty()) {
             targetIds = electionDAO.getTheBests("vtc");
         }
+        result.add(electionDAO.getIsComplicated());
         for (int i = 0; i < targetIds.size(); i++) {
             result.add(completedTaskDAO.findContentByUserIdAndSubTaskIndex(targetIds.get(i), i + ""));
         }
