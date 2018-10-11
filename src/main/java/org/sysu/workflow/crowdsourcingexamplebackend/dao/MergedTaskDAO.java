@@ -26,6 +26,10 @@ public class MergedTaskDAO {
         mergedTaskRepository.deleteMergedTasksByUserId(userId);
     }
 
+    public void deleteAll() {
+        mergedTaskRepository.deleteAll();
+    }
+
     public List<VotePageData> getVotePageData() {
         List<VotePageData> result = new ArrayList<>();
         List<String> userIds = mergedTaskRepository.findAllUserId();

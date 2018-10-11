@@ -12,6 +12,7 @@ import org.sysu.workflow.crowdsourcingexamplebackend.entity.FormData;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.VotePageData;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,6 +45,11 @@ public class VoteController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/vt/data/*")
+    public ResponseEntity<?> getVTData() {
+        return new ResponseEntity<>(new ArrayList<VotePageData>(), HttpStatus.OK);
+    }
+
     @GetMapping(value = "/vtd/data/*")
     public ResponseEntity<?> getVTDData() {
         List<VotePageData> result = subTaskDAO.getVotePageData();
@@ -62,13 +68,13 @@ public class VoteController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/submit/{index}")
+    @PostMapping(value = "/submit/{stage}/{index}")
     @Transactional
-    public ResponseEntity<?> submit(@PathVariable String index, @RequestBody FormData vote) {
+    public ResponseEntity<?> submit(@PathVariable String stage, @PathVariable String index, @RequestBody FormData vote) {
         String fromId = vote.getUserId();
-        electionDAO.deleteIfExist(fromId, index);
+        electionDAO.deleteIfExist(fromId, index, stage);
         String targetId = (String) vote.getData();
-        electionDAO.save(new Election(fromId, targetId, index));
+        electionDAO.save(new Election(fromId, targetId, index, stage));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

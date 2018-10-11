@@ -44,7 +44,7 @@ public class TaskCompletionController {
     public ResponseEntity<?> getTipsAndTask(@PathVariable int index) {
         List<String> result = tipsAndTasksDAO.getTipsAndTaskByStage("tc");
         if (targetId == null || "".equals(targetId)) {
-            targetId = electionDAO.getTheBestAndClean();
+            targetId = electionDAO.getTheBest("vtd");
         }
         result.add(subTaskDAO.getSubTaskByUserIdAndIndex(targetId, index));
         subTaskDAO.setCount(targetId);

@@ -1,20 +1,43 @@
 package org.sysu.workflow.crowdsourcingexamplebackend;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.sysu.workflow.crowdsourcingexamplebackend.dao.CompletedTaskDAO;
+import org.sysu.workflow.crowdsourcingexamplebackend.dao.ElectionDAO;
+import org.sysu.workflow.crowdsourcingexamplebackend.dao.MergedTaskDAO;
+import org.sysu.workflow.crowdsourcingexamplebackend.dao.SubTaskDAO;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.TipsAndTasks;
 import org.sysu.workflow.crowdsourcingexamplebackend.repository.*;
 
 @SpringBootApplication
 @Configuration
+@RestController
 public class CrowdsourcingExampleBackEndApplication {
+
+    @Autowired
+    private SubTaskDAO subTaskDAO;
+
+    @Autowired
+    private ElectionDAO electionDAO;
+
+    @Autowired
+    private CompletedTaskDAO completedTaskDAO;
+
+    @Autowired
+    private MergedTaskDAO mergedTaskDAO;
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(CrowdsourcingExampleBackEndApplication.class);
@@ -30,6 +53,17 @@ public class CrowdsourcingExampleBackEndApplication {
                 registry.addMapping("/**").allowedOrigins("http://localhost:8080");
             }
         };
+    }
+
+    @PostMapping(value = "reset")
+    public ResponseEntity<?> reset(@RequestBody String password) {
+        if ("workflow".equals(password)) {
+            subTaskDAO.deleteAll();
+            electionDAO.deleteAll();
+            completedTaskDAO.deleteAll();
+            mergedTaskDAO.deleteAll();
+        }
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     @Bean
@@ -48,6 +82,9 @@ public class CrowdsourcingExampleBackEndApplication {
             tipsAndTasksRepository.save(new TipsAndTasks("tm", 0, "0 tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm 0"));
             tipsAndTasksRepository.save(new TipsAndTasks("tm", 1, "1 tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm tm 1"));
 
+            tipsAndTasksRepository.save(new TipsAndTasks("vt", 0, "0 vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt 0"));
+            tipsAndTasksRepository.save(new TipsAndTasks("vt", 1, "1 vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt vt 1"));
+
             tipsAndTasksRepository.save(new TipsAndTasks("vtd", 0, "0 vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd 0"));
             tipsAndTasksRepository.save(new TipsAndTasks("vtd", 1, "1 vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd vtd 1"));
 
@@ -56,7 +93,7 @@ public class CrowdsourcingExampleBackEndApplication {
 
             tipsAndTasksRepository.save(new TipsAndTasks("vtm", 0, "0 vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm 0"));
             tipsAndTasksRepository.save(new TipsAndTasks("vtm", 1, "1 vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm 1"));
-//
+
 //            subTaskRepository.save(new SubTask("user_1", "user 1 : first step"));
 //            subTaskRepository.save(new SubTask("user_1", "user 1 : second step"));
 //

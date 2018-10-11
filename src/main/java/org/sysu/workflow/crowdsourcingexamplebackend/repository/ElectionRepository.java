@@ -14,17 +14,17 @@ import java.util.List;
 public interface ElectionRepository extends JpaRepository<Election, Long> {
 
     @Transactional
-    void deleteElectionByFromIdAndSubTaskIndex(String fromId, String subTaskIndex);
+    void deleteElectionByFromIdAndSubTaskIndexAndStage(String fromId, String subTaskIndex, String stage);
 
     @Transactional
     @Modifying
     @Query(value = "delete from election where true", nativeQuery = true)
     void deleteAll();
 
-    @Query(value = "select target_id, count(*) as count from election group by target_id order by count desc", nativeQuery = true)
-    List<Object[]> findTheBestUserId();
+    @Query(value = "select target_id, count(*) as count from election where stage = ?1 group by target_id order by count desc", nativeQuery = true)
+    List<Object[]> findTheBestUserIdByStage(String stage);
 
-    @Query(value = "select target_id, count(*) as count from election where sub_task_index = ?1 group by target_id order by count desc", nativeQuery = true)
-    List<Object[]> findTheBestUserIdBySubTaskIndex(String subTaskIndex);
+    @Query(value = "select target_id, count(*) as count from election where sub_task_index = ?1 and stage = ?2 group by target_id order by count desc", nativeQuery = true)
+    List<Object[]> findTheBestUserIdBySubTaskIndexAndStage(String subTaskIndex, String stage);
 
 }

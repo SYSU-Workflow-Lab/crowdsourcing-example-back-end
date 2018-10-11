@@ -21,13 +21,17 @@ public class Election {
     @Column(nullable = false)
     private String subTaskIndex;
 
+    @Column(nullable = false)
+    private String stage;
+
     public Election() {
     }
 
-    public Election(String fromId, String targetId, String subTaskIndex) {
+    public Election(String fromId, String targetId, String subTaskIndex, String stage) {
         this.fromId = fromId;
         this.targetId = targetId;
         this.subTaskIndex = subTaskIndex;
+        this.stage = stage;
     }
 
     public Long getId() {
@@ -61,4 +65,13 @@ public class Election {
     public void setSubTaskIndex(String subTaskIndex) {
         this.subTaskIndex = subTaskIndex;
     }
+
+    public String getStage() {
+        return stage;
+    }
+
+    public void setStage(String stage) {
+        this.stage = stage;
+    }
+
 }

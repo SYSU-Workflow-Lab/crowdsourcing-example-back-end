@@ -27,6 +27,10 @@ public class CompletedTaskDAO {
         completedTaskRepository.deleteCompletedTaskByUserIdAndSubTaskIndex(userId, index);
     }
 
+    public void deleteAll() {
+        completedTaskRepository.deleteAll();
+    }
+
     public List<VotePageData> getVotePageData(String index) {
         List<VotePageData> result = new ArrayList<>();
         List<CompletedTask> completedTaskList = completedTaskRepository.findCompletedTasksBySubTaskIndex(index);

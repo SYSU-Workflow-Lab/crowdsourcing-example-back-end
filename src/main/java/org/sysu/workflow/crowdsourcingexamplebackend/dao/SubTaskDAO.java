@@ -18,7 +18,7 @@ public class SubTaskDAO {
     @Autowired
     private SubTaskRepository subTaskRepository;
 
-    private int count = 3;
+    private int count;
 
     public void save(SubTask subTask) {
         subTaskRepository.save(subTask);
@@ -26,6 +26,10 @@ public class SubTaskDAO {
 
     public void deleteIfExist(String userId) {
         subTaskRepository.deleteSubTasksByUserId(userId);
+    }
+
+    public void deleteAll() {
+        subTaskRepository.deleteAll();
     }
 
     public List<VotePageData> getVotePageData() {

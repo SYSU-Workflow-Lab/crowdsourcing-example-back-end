@@ -48,7 +48,7 @@ public class TaskMergenceController {
     public ResponseEntity<?> getTipsAndTask() {
         List<String> result = tipsAndTasksDAO.getTipsAndTaskByStage("tm");
         if (targetIds == null || targetIds.isEmpty()) {
-            targetIds = electionDAO.getTheBestsAndClean();
+            targetIds = electionDAO.getTheBests("vtc");
         }
         for (int i = 0; i < targetIds.size(); i++) {
             result.add(completedTaskDAO.findContentByUserIdAndSubTaskIndex(targetIds.get(i), i + ""));
