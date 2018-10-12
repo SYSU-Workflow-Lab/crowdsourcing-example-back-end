@@ -17,6 +17,12 @@ public class TipsAndTasksDAO {
     @Autowired
     private TipsAndTasksRepository tipsAndTasksRepository;
 
+    /**
+     * 获取指定阶段的tips和tasks数据
+     *
+     * @param stage
+     * @return
+     */
     public List<String> getTipsAndTaskByStage(String stage) {
         List<String> result = new ArrayList<>();
         try {
@@ -28,10 +34,18 @@ public class TipsAndTasksDAO {
         return result;
     }
 
+    /**
+     * 获取所有的tips和tasks数据
+     */
     public List<TipsAndTasks> getAll() {
         return tipsAndTasksRepository.findAll();
     }
 
+    /**
+     * 更新指定的tips或tasks数据
+     *
+     * @param tipsAndTasks
+     */
     public void updateData(TipsAndTasks tipsAndTasks) {
         tipsAndTasksRepository.updateData(tipsAndTasks.getStage(), tipsAndTasks.getType(), tipsAndTasks.getContent());
     }

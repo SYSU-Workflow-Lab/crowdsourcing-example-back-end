@@ -39,6 +39,9 @@ public class ManagementController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 清空数据
+     */
     @GetMapping(value = "/reset")
     public ResponseEntity<?> reset() {
         subTaskDAO.deleteAll();
@@ -49,11 +52,17 @@ public class ManagementController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    /**
+     * 获取所有的tips和tasks数据
+     */
     @GetMapping(value = "/tips-and-tasks")
     public ResponseEntity<?> getTipsAndTasks() {
         return new ResponseEntity<>(tipsAndTasksDAO.getAll(), HttpStatus.OK);
     }
 
+    /**
+     * 获取投票结果相关数据
+     */
     @GetMapping(value = "/data")
     public ResponseEntity<?> getBestContent() {
         Map<String, List<VotePageData>> result = new HashMap<>();
@@ -113,6 +122,9 @@ public class ManagementController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 更新指定的tips或tasks数据
+     */
     @PostMapping(value = "/update/tips-and-tasks")
     public ResponseEntity<?> updateTipsAndTask(@RequestBody TipsAndTasks data) {
         tipsAndTasksDAO.updateData(data);

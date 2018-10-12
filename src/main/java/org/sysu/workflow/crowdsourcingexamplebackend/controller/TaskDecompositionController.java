@@ -31,12 +31,20 @@ public class TaskDecompositionController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 获取该阶段tips和tasks数据
+     */
     @GetMapping(value = "/tips-and-task")
     public ResponseEntity<?> getTipsAndTask() {
         List<String> result = tipsAndTasksDAO.getTipsAndTaskByStage("td");
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 接收提交的数据
+     *
+     * @param tasks
+     */
     @PostMapping(value = "/submit")
     @Transactional
     public ResponseEntity<?> submit(@RequestBody FormData tasks) {

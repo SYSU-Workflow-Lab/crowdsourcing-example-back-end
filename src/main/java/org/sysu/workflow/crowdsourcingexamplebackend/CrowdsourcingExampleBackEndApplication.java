@@ -22,6 +22,9 @@ public class CrowdsourcingExampleBackEndApplication {
         app.run(args);
     }
 
+    /**
+     * 设置允许跨域访问
+     */
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
@@ -32,6 +35,9 @@ public class CrowdsourcingExampleBackEndApplication {
         };
     }
 
+    /**
+     * 初始化数据
+     */
     @Bean
     public CommandLineRunner init(TipsAndTasksRepository tipsAndTasksRepository,
                                   SubTaskRepository subTaskRepository,

@@ -16,12 +16,16 @@ public class TipsAndTasks {
     private String stage;
 
     /**
+     * 类型
      * 0 for tips
      * 1 for task
      */
     @Column
     private int type;
 
+    /**
+     * 内容
+     */
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(nullable = false)

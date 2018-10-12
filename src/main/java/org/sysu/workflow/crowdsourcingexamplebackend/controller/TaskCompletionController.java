@@ -40,6 +40,11 @@ public class TaskCompletionController {
 
     private String targetId;
 
+    /**
+     * 获取该阶段tips和tasks数据
+     *
+     * @param index
+     */
     @GetMapping(value = "/tips-and-task/{index}")
     public ResponseEntity<?> getTipsAndTask(@PathVariable int index) {
         List<String> result = tipsAndTasksDAO.getTipsAndTaskByStage("tc");
@@ -51,6 +56,11 @@ public class TaskCompletionController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 接收提交的数据
+     *
+     * @param solution
+     */
     @PostMapping(value = "/submit")
     @Transactional
     public ResponseEntity<?> submit(@RequestBody FormData solution) {

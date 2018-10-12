@@ -12,9 +12,15 @@ public class MergedTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * 提交者id
+     */
     @Column(nullable = false)
     private String userId;
 
+    /**
+     * 提交内容
+     */
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(nullable = false)

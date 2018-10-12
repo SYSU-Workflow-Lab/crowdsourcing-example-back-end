@@ -39,35 +39,59 @@ public class VoteController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 获取指定目的的tips和tasks数据
+     *
+     * @param purpose
+     */
     @GetMapping(value = "/{purpose}/tips-and-task")
     public ResponseEntity<?> getTipsAndTask(@PathVariable String purpose) {
         List<String> result = tipsAndTasksDAO.getTipsAndTaskByStage(purpose);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 获取任务判别阶段的投票数据
+     */
     @GetMapping(value = "/vt/data/*")
     public ResponseEntity<?> getVTData() {
         return new ResponseEntity<>(new ArrayList<VotePageData>(), HttpStatus.OK);
     }
 
+    /**
+     * 获取任务分解阶段的投票数据
+     */
     @GetMapping(value = "/vtd/data/*")
     public ResponseEntity<?> getVTDData() {
         List<VotePageData> result = subTaskDAO.getVotePageData();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 获取任务完成阶段的投票数据
+     */
     @GetMapping(value = "/vtc/data/{index}")
     public ResponseEntity<?> getVTCData(@PathVariable String index) {
         List<VotePageData> result = completedTaskDAO.getVotePageData(index);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 获取任务合并阶段的投票数据
+     */
     @GetMapping(value = "/vtm/data/*")
     public ResponseEntity<?> getVTMData() {
         List<VotePageData> result = mergedTaskDAO.getVotePageData();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 接收提交的投票数据
+     *
+     * @param stage
+     * @param index
+     * @param vote
+     */
     @PostMapping(value = "/submit/{stage}/{index}")
     @Transactional
     public ResponseEntity<?> submit(@PathVariable String stage, @PathVariable String index, @RequestBody FormData vote) {

@@ -12,15 +12,27 @@ public class Election {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * 提交者id
+     */
     @Column(nullable = false)
     private String fromId;
 
+    /**
+     * 被投票用户id
+     */
     @Column(nullable = false)
     private String targetId;
 
+    /**
+     * 投票子任务index
+     */
     @Column(nullable = false)
     private String subTaskIndex;
 
+    /**
+     * 投票任务的阶段
+     */
     @Column(nullable = false)
     private String stage;
 

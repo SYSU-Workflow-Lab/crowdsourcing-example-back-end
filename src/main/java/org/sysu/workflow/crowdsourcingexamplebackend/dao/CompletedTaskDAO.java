@@ -19,18 +19,38 @@ public class CompletedTaskDAO {
     @Autowired
     private CompletedTaskRepository completedTaskRepository;
 
+    /**
+     * 存储新数据
+     *
+     * @param completedTask
+     */
     public void save(CompletedTask completedTask) {
         completedTaskRepository.save(completedTask);
     }
 
+    /**
+     * 根据提交者id和任务index删除已有的数据
+     *
+     * @param userId
+     * @param index
+     */
     public void deleteIfExist(String userId, String index) {
         completedTaskRepository.deleteCompletedTaskByUserIdAndSubTaskIndex(userId, index);
     }
 
+    /**
+     * 删除所有数据
+     */
     public void deleteAll() {
         completedTaskRepository.deleteAll();
     }
 
+    /**
+     * 获取投票页面显示所用数据
+     *
+     * @param index
+     * @return
+     */
     public List<VotePageData> getVotePageData(String index) {
         List<VotePageData> result = new ArrayList<>();
         List<CompletedTask> completedTaskList = completedTaskRepository.findCompletedTasksBySubTaskIndex(index);
@@ -42,6 +62,13 @@ public class CompletedTaskDAO {
         return result;
     }
 
+    /**
+     * 根据提交者id和所做任务的index获取对应的任务完成结果
+     *
+     * @param userId
+     * @param subTaskId
+     * @return
+     */
     public String findContentByUserIdAndSubTaskIndex(String userId, String subTaskId) {
         CompletedTask temp = completedTaskRepository.findCompletedTaskByUserIdAndSubTaskIndex(userId, subTaskId);
         if (temp == null) {

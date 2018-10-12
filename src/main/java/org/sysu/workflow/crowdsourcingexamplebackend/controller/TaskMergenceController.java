@@ -44,6 +44,9 @@ public class TaskMergenceController {
 
     private List<String> targetIds;
 
+    /**
+     * 获取该阶段tips和tasks数据
+     */
     @GetMapping(value = "/tips-and-task")
     public ResponseEntity<?> getTipsAndTask() {
         List<String> result = tipsAndTasksDAO.getTipsAndTaskByStage("tm");
@@ -57,6 +60,11 @@ public class TaskMergenceController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    /**
+     * 接收提交的数据
+     *
+     * @param solution
+     */
     @PostMapping(value = "/submit")
     @Transactional
     public ResponseEntity<?> submit(@RequestBody FormData solution) {
