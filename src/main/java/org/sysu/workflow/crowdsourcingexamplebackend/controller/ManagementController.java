@@ -5,13 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.CompletedTaskDAO;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.ElectionDAO;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.MergedTaskDAO;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.SubTaskDAO;
+import org.springframework.web.bind.annotation.*;
+import org.sysu.workflow.crowdsourcingexamplebackend.dao.*;
+import org.sysu.workflow.crowdsourcingexamplebackend.entity.TipsAndTasks;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.VotePageData;
 
 import java.util.ArrayList;
@@ -38,15 +34,24 @@ public class ManagementController {
     @Autowired
     private MergedTaskDAO mergedTaskDAO;
 
+    @Autowired
+    private TipsAndTasksDAO tipsAndTasksDAO;
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping(value = "/reset")
     public ResponseEntity<?> reset() {
         subTaskDAO.deleteAll();
+        subTaskDAO.setCount("-1");
         electionDAO.deleteAll();
         completedTaskDAO.deleteAll();
         mergedTaskDAO.deleteAll();
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/tips-and-tasks")
+    public ResponseEntity<?> getTipsAndTasks() {
+        return new ResponseEntity<>(tipsAndTasksDAO.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/data")
@@ -106,5 +111,11 @@ public class ManagementController {
         result.put("mergedtask", listVPD4);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/update/tips-and-tasks")
+    public ResponseEntity<?> updateTipsAndTask(@RequestBody TipsAndTasks data) {
+        tipsAndTasksDAO.updateData(data);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
