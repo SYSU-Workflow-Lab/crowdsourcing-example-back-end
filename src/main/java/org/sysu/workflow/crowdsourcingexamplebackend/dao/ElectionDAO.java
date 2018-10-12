@@ -2,7 +2,6 @@ package org.sysu.workflow.crowdsourcingexamplebackend.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.sysu.workflow.crowdsourcingexamplebackend.entity.BestElection;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.Election;
 import org.sysu.workflow.crowdsourcingexamplebackend.repository.ElectionRepository;
 
@@ -22,9 +21,6 @@ public class ElectionDAO {
     @Autowired
     private SubTaskDAO subTaskDAO;
 
-    @Autowired
-    private BestElectionDAO bestElectionDAO;
-
     public void save(Election election) {
         electionRepository.save(election);
     }
@@ -39,32 +35,36 @@ public class ElectionDAO {
 
     public String getTheBest(String stage) {
         String targetId = "";
-        try {
-            targetId = (String) electionRepository.findTheBestUserIdByStage(stage).get(0)[0];
-            bestElectionDAO.save(new BestElection(stage, "0", targetId));
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
+        List<Object[]> temp = electionRepository.findTheBestUserIdByStage(stage);
+        if (!temp.isEmpty() && temp.get(0).length != 0) {
+            targetId = (String) temp.get(0)[0];
         }
         return targetId;
     }
 
     public List<String> getTheBests(String stage) {
         List<String> bests = new ArrayList<>();
-        try {
-            int count = subTaskDAO.getCount();
-            for (int i = 0; i < count; i++) {
-                String bestId = (String) electionRepository.findTheBestUserIdBySubTaskIndexAndStage(i + "", stage).get(0)[0];
-                bests.add(bestId);
-                bestElectionDAO.save(new BestElection(stage, i + "", bestId));
+        int count = subTaskDAO.getCount();
+        for (int i = 0; i < count; i++) {
+            List<Object[]> temp = electionRepository.findTheBestUserIdBySubTaskIndexAndStage(i + "", stage);
+            if (!temp.isEmpty() && temp.get(0).length != 0) {
+                bests.add((String) temp.get(0)[0]);
+            } else {
+                bests.add("");
             }
-        } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
         }
         return bests;
     }
 
     public String getIsComplicated() {
-        return (String) electionRepository.getIsComplicated().get(0)[0];
+
+        String result = "No Data";
+        List<Object[]> temp = electionRepository.getIsComplicated();
+        if (!temp.isEmpty() && temp.get(0).length != 0) {
+            result = (String) temp.get(0)[0];
+        }
+
+        return result;
     }
 
 }

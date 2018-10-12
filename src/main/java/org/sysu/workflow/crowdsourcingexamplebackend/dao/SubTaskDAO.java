@@ -42,6 +42,10 @@ public class SubTaskDAO {
         return result;
     }
 
+    public List<String> getSubTaskByUserId(String userId) {
+        return subTaskRepository.findContentsByUserId(userId);
+    }
+
     public String getSubTaskByUserIdAndIndex(String userId, int index) {
         List<String> contents = subTaskRepository.findContentsByUserId(userId);
         return contents.get(index);

@@ -1,43 +1,20 @@
 package org.sysu.workflow.crowdsourcingexamplebackend;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.CompletedTaskDAO;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.ElectionDAO;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.MergedTaskDAO;
-import org.sysu.workflow.crowdsourcingexamplebackend.dao.SubTaskDAO;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.TipsAndTasks;
 import org.sysu.workflow.crowdsourcingexamplebackend.repository.*;
 
 @SpringBootApplication
 @Configuration
-@RestController
 public class CrowdsourcingExampleBackEndApplication {
-
-    @Autowired
-    private SubTaskDAO subTaskDAO;
-
-    @Autowired
-    private ElectionDAO electionDAO;
-
-    @Autowired
-    private CompletedTaskDAO completedTaskDAO;
-
-    @Autowired
-    private MergedTaskDAO mergedTaskDAO;
 
     public static void main(String[] args) {
         SpringApplication app = new SpringApplication(CrowdsourcingExampleBackEndApplication.class);
@@ -53,17 +30,6 @@ public class CrowdsourcingExampleBackEndApplication {
                 registry.addMapping("/**").allowedOrigins("http://localhost:8080");
             }
         };
-    }
-
-    @PostMapping(value = "reset")
-    public ResponseEntity<?> reset(@RequestBody String password) {
-        if ("workflow".equals(password)) {
-            subTaskDAO.deleteAll();
-            electionDAO.deleteAll();
-            completedTaskDAO.deleteAll();
-            mergedTaskDAO.deleteAll();
-        }
-        return new ResponseEntity(HttpStatus.OK);
     }
 
     @Bean
@@ -94,6 +60,10 @@ public class CrowdsourcingExampleBackEndApplication {
             tipsAndTasksRepository.save(new TipsAndTasks("vtm", 0, "0 vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm 0"));
             tipsAndTasksRepository.save(new TipsAndTasks("vtm", 1, "1 vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm vtm 1"));
 
+//            electionRepository.save(new Election("qwe", "Simple", "0", "vt"));
+//            electionRepository.save(new Election("asd", "Complicated", "0", "vt"));
+//            electionRepository.save(new Election("zxc", "Complicated", "0", "vt"));
+//
 //            subTaskRepository.save(new SubTask("user_1", "user 1 : first step"));
 //            subTaskRepository.save(new SubTask("user_1", "user 1 : second step"));
 //
@@ -105,9 +75,9 @@ public class CrowdsourcingExampleBackEndApplication {
 //            subTaskRepository.save(new SubTask("user_3", "user 3 : second step"));
 //            subTaskRepository.save(new SubTask("user_3", "user 3 : third step"));
 //
-////            electionRepository.save(new Election("qwe", "user_2", 0));
-////            electionRepository.save(new Election("asd", "user_2", 0));
-////            electionRepository.save(new Election("zxc", "user_1", 0));
+//            electionRepository.save(new Election("qwe", "user_2", "0", "vtd"));
+//            electionRepository.save(new Election("asd", "user_2", "0", "vtd"));
+//            electionRepository.save(new Election("zxc", "user_1", "0", "vtd"));
 //
 //            completedTaskRepository.save(new CompletedTask("user_1", "user 1 : first solution", "0"));
 //            completedTaskRepository.save(new CompletedTask("user_1", "user 1 : second solution", "1"));
@@ -120,20 +90,24 @@ public class CrowdsourcingExampleBackEndApplication {
 //            completedTaskRepository.save(new CompletedTask("user_3", "user 3 : second solution", "1"));
 //            completedTaskRepository.save(new CompletedTask("user_3", "user 3 : third solution", "2"));
 //
-////            electionRepository.save(new Election("qwe", "user_1", "0"));
-////            electionRepository.save(new Election("asd", "user_2", "0"));
-////            electionRepository.save(new Election("zxc", "user_1", "0"));
-////
-////            electionRepository.save(new Election("qwe", "user_1", "1"));
-////            electionRepository.save(new Election("asd", "user_3", "1"));
-////            electionRepository.save(new Election("zxc", "user_3", "1"));
-////
-////            electionRepository.save(new Election("qwe", "user_2", "2"));
-////            electionRepository.save(new Election("asd", "user_3", "2"));
+//            electionRepository.save(new Election("qwe", "user_1", "0", "vtc"));
+//            electionRepository.save(new Election("asd", "user_2", "0", "vtc"));
+//            electionRepository.save(new Election("zxc", "user_1", "0", "vtc"));
 //
-//            mergedTaskRepository.save(new MergedTask("user_1", "user 1 : first solution\nuser 3 : second solution\nuser 2 : third solution"));
-//            mergedTaskRepository.save(new MergedTask("user_2", "user 1 : first solution\tuser 3 : second solution\tuser 2 : third solution"));
-//            mergedTaskRepository.save(new MergedTask("user_3", "user 1 : first solution.user 3 : second solution.user 2 : third solution"));
+//            electionRepository.save(new Election("qwe", "user_1", "1", "vtc"));
+//            electionRepository.save(new Election("asd", "user_3", "1", "vtc"));
+//            electionRepository.save(new Election("zxc", "user_3", "1", "vtc"));
+//
+//            electionRepository.save(new Election("qwe", "user_2", "2", "vtc"));
+//            electionRepository.save(new Election("asd", "user_3", "2", "vtc"));
+//
+//            mergedTaskRepository.save(new MergedTask("user_1", "user1:\r\nuser 1 : first solution\r\nuser 3 : second solution\r\nuser 2 : third solution"));
+//            mergedTaskRepository.save(new MergedTask("user_2", "user2:\r\nuser 1 : first solution\r\nuser 3 : second solution\r\nuser 2 : third solution"));
+//            mergedTaskRepository.save(new MergedTask("user_3", "user3:\r\nuser 1 : first solution\r\nuser 3 : second solution\r\nuser 2 : third solution"));
+//
+//            electionRepository.save(new Election("qwe", "user_2", "0", "vtm"));
+//            electionRepository.save(new Election("asd", "user_2", "0", "vtm"));
+//            electionRepository.save(new Election("zxc", "user_1", "0", "vtm"));
 
         };
     }

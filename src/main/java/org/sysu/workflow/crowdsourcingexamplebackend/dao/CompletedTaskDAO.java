@@ -43,7 +43,12 @@ public class CompletedTaskDAO {
     }
 
     public String findContentByUserIdAndSubTaskIndex(String userId, String subTaskId) {
-        return completedTaskRepository.findCompletedTaskByUserIdAndSubTaskIndex(userId, subTaskId).getContent();
+        CompletedTask temp = completedTaskRepository.findCompletedTaskByUserIdAndSubTaskIndex(userId, subTaskId);
+        if (temp == null) {
+            return "No Data";
+        } else {
+            return temp.getContent();
+        }
     }
 
 }

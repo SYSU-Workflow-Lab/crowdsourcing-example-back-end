@@ -40,4 +40,8 @@ public class MergedTaskDAO {
         return result;
     }
 
+    public String findContentByUserId(String userId) {
+        return mergedTaskRepository.findContentsByUserId(userId).get(0);
+    }
+
 }

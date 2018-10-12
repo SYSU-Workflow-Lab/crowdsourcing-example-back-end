@@ -47,10 +47,10 @@ public class TaskMergenceController {
     @GetMapping(value = "/tips-and-task")
     public ResponseEntity<?> getTipsAndTask() {
         List<String> result = tipsAndTasksDAO.getTipsAndTaskByStage("tm");
+        result.add(electionDAO.getIsComplicated());
         if (targetIds == null || targetIds.isEmpty()) {
             targetIds = electionDAO.getTheBests("vtc");
         }
-        result.add(electionDAO.getIsComplicated());
         for (int i = 0; i < targetIds.size(); i++) {
             result.add(completedTaskDAO.findContentByUserIdAndSubTaskIndex(targetIds.get(i), i + ""));
         }
