@@ -33,4 +33,12 @@ public interface TipsAndTasksRepository extends JpaRepository<TipsAndTasks, Long
     @Query(value = "update tips_and_tasks set content = ?3 where stage = ?1 and type = ?2", nativeQuery = true)
     void updateData(String stage, int type, String content);
 
+    /**
+     * 删除全部数据
+     */
+    @Transactional
+    @Modifying
+    @Query(value = "delete from tips_and_tasks where true", nativeQuery = true)
+    void deleteAll();
+
 }

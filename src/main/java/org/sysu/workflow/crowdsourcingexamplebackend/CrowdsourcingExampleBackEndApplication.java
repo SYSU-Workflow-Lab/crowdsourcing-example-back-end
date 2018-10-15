@@ -30,7 +30,7 @@ public class CrowdsourcingExampleBackEndApplication {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://localhost:8080");
+                registry.addMapping("/**").allowedOrigins("http://222.200.180.59:8888");
             }
         };
     }
@@ -45,6 +45,8 @@ public class CrowdsourcingExampleBackEndApplication {
                                   CompletedTaskRepository completedTaskRepository,
                                   MergedTaskRepository mergedTaskRepository) {
         return args -> {
+            tipsAndTasksRepository.deleteAll();
+
             tipsAndTasksRepository.save(new TipsAndTasks("td", 0, "0 td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td 0"));
             tipsAndTasksRepository.save(new TipsAndTasks("td", 1, "1 td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td td 1"));
 
