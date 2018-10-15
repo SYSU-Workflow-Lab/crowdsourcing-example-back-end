@@ -97,4 +97,13 @@ public class ElectionDAO {
         return result;
     }
 
+    /**
+     * 获取某个阶段的投票总数
+     *
+     * @param stage
+     */
+    public int getCountOfStage(String stage) {
+        return electionRepository.getCountOfStage(stage);
+    }
+
 }

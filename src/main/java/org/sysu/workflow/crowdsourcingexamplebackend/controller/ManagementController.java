@@ -130,4 +130,17 @@ public class ManagementController {
         tipsAndTasksDAO.updateData(data);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    /**
+     * 获取每个阶段的投票总数
+     */
+    @GetMapping(value = "/counts")
+    public ResponseEntity<?> getCounts() {
+        List<Integer> result = new ArrayList<>();
+        result.add(electionDAO.getCountOfStage("vtd"));
+        result.add(electionDAO.getCountOfStage("vtc"));
+        result.add(electionDAO.getCountOfStage("vtm"));
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

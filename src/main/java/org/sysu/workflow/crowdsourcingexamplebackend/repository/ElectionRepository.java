@@ -56,4 +56,6 @@ public interface ElectionRepository extends JpaRepository<Election, Long> {
     @Query(value = "select target_id, count(*) as count from election where stage = 'vt' group by target_id order by count desc", nativeQuery = true)
     List<Object[]> getIsComplicated();
 
+    @Query(value = "select count(*) from election where stage = ?1", nativeQuery = true)
+    int getCountOfStage(String stage);
 }
