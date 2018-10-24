@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.sysu.workflow.crowdsourcingexamplebackend.dao.ElectionDAO;
+import org.sysu.workflow.crowdsourcingexamplebackend.dao.SubTaskDAO;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.Election;
 import org.sysu.workflow.crowdsourcingexamplebackend.entity.SubTask;
 import org.sysu.workflow.crowdsourcingexamplebackend.repository.*;
@@ -31,24 +33,30 @@ public class CrowdsourcingExampleBackEndApplicationTests {
     @Autowired
     MergedTaskRepository mergedTaskRepository;
 
+    @Autowired
+    SubTaskDAO subTaskDAO;
+
+    @Autowired
+    ElectionDAO electionDAO;
+
     @Before
     public void dataInit() {
-        subTaskRepository.save(new SubTask("user_1", "user 1 : first step"));
-        subTaskRepository.save(new SubTask("user_1", "user 1 : second step"));
-
-        subTaskRepository.save(new SubTask("user_2", "user 2 : first step"));
-        subTaskRepository.save(new SubTask("user_2", "user 2 : second step"));
-        subTaskRepository.save(new SubTask("user_2", "user 2 : third step"));
-
-        subTaskRepository.save(new SubTask("user_3", "user 3 : first step"));
-        subTaskRepository.save(new SubTask("user_3", "user 3 : second step"));
-        subTaskRepository.save(new SubTask("user_3", "user 3 : third step"));
-        subTaskRepository.save(new SubTask("user_3", "user 3 : forth step"));
-
-
-        electionRepository.save(new Election("qwe", "user_2", "0", "vtd"));
-        electionRepository.save(new Election("asd", "user_2", "0", "vtd"));
-        electionRepository.save(new Election("zxc", "user_1", "0", "vtd"));
+//        subTaskRepository.save(new SubTask("user_1", "user 1 : first step"));
+//        subTaskRepository.save(new SubTask("user_1", "user 1 : second step"));
+//
+//        subTaskRepository.save(new SubTask("user_2", "user 2 : first step"));
+//        subTaskRepository.save(new SubTask("user_2", "user 2 : second step"));
+//        subTaskRepository.save(new SubTask("user_2", "user 2 : third step"));
+//
+//        subTaskRepository.save(new SubTask("user_3", "user 3 : first step"));
+//        subTaskRepository.save(new SubTask("user_3", "user 3 : second step"));
+//        subTaskRepository.save(new SubTask("user_3", "user 3 : third step"));
+//        subTaskRepository.save(new SubTask("user_3", "user 3 : forth step"));
+//
+//
+//        electionRepository.save(new Election("qwe", "user_2", "0", "vtd"));
+//        electionRepository.save(new Election("asd", "user_2", "0", "vtd"));
+//        electionRepository.save(new Election("zxc", "user_1", "0", "vtd"));
 
 //            completedTaskRepository.save(new CompletedTask("user_1", "user 1 : first solution", "0"));
 //            completedTaskRepository.save(new CompletedTask("user_1", "user 1 : second solution", "1"));
@@ -75,12 +83,13 @@ public class CrowdsourcingExampleBackEndApplicationTests {
 //            mergedTaskRepository.save(new MergedTask("user_1", "user 1 : first solution\nuser 3 : second solution\nuser 2 : third solution"));
 //            mergedTaskRepository.save(new MergedTask("user_2", "user 1 : first solution\tuser 3 : second solution\tuser 2 : third solution"));
 //            mergedTaskRepository.save(new MergedTask("user_3", "user 1 : first solution.user 3 : second solution.user 2 : third solution"));
+
     }
 
     @Test
     public void test1() {
 
-        System.out.println(electionRepository.findTheBestUserIdByStage("vtd").get(0)[0]);
+        System.out.println(electionDAO.getTheBest("vtd"));
 
     }
 

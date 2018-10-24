@@ -38,7 +38,7 @@ public class TaskCompletionController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    private String targetId;
+    private static String targetId;
 
     /**
      * 获取该阶段tips和tasks数据
@@ -76,6 +76,10 @@ public class TaskCompletionController {
         completedTaskDAO.save(new CompletedTask(fromId, content, index));
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    public static void clearTargetId() {
+        targetId = "";
     }
 
 }

@@ -49,6 +49,7 @@ public class ManagementController {
         electionDAO.deleteAll();
         completedTaskDAO.deleteAll();
         mergedTaskDAO.deleteAll();
+        TaskCompletionController.clearTargetId();
         return new ResponseEntity(HttpStatus.OK);
     }
 
