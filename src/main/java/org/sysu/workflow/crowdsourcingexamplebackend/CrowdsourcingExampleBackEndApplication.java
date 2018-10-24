@@ -23,19 +23,6 @@ public class CrowdsourcingExampleBackEndApplication {
     }
 
     /**
-     * 设置允许跨域访问
-     */
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurerAdapter() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("http://222.200.180.59:8888", "http://localhost:8080");
-            }
-        };
-    }
-
-    /**
      * 初始化数据
      */
     @Bean
